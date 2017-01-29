@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.johngb.rugbyscorer.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_rugby"/>
+
+    <LinearLayout
+        android:id="@+id/score_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <!--Team A-->
+        <LinearLayout style="@style/team_layout">
+
+            <!--Team A Label-->
+            <TextView
+                style="@style/team_name"
+                android:text="@string/team_a_name" />
+
+            <!--Team A Score-->
+            <TextView
+                android:id="@+id/team_a_score"
+                style="@style/score_display"
+                android:text="0" />
+
+            <!--Team A Try Button-->
+            <Button
+                style="@style/buttonScore"
+                android:onClick="tryTeamA"
+                android:text="@string/btn_text_try"
+                />
+
+            <!--Team A Conversion Button-->
+            <Button
+                android:id="@+id/btn_team_a_conversion"
+                style="@style/buttonScore"
+                android:enabled="false"
+                android:onClick="conversionTeamA"
+                android:text="@string/btn_text_conversion"
+                />
+
+            <!--Team A Penalty Button-->
+            <Button
+                style="@style/buttonScore"
+                android:onClick="penaltyTeamA"
+                android:text="@string/btn_text_penalty"
+                />
+
+        </LinearLayout>
+
+        <!--Line Separator-->
+        <View style="@style/verticalSeparator" />
+
+        <!--Team B-->
+        <LinearLayout style="@style/team_layout">
+
+            <!--Team B Label-->
+            <TextView
+                style="@style/team_name"
+                android:text="@string/team_b_name" />
+
+            <!--Team B Score-->
+            <TextView
+                android:id="@+id/team_b_score"
+                style="@style/score_display"
+                android:text="0" />
+
+            <!--Team B Try Button-->
+            <Button
+                style="@style/buttonScore"
+                android:onClick="tryTeamB"
+                android:text="@string/btn_text_try"
+                />
+
+            <!--Team A Conversion Button-->
+            <Button
+                android:id="@+id/btn_team_b_conversion"
+                style="@style/buttonScore"
+                android:enabled="false"
+                android:onClick="conversionTeamB"
+                android:text="@string/btn_text_conversion"
+                />
+
+            <!--Team A Penalty Button-->
+            <Button
+                style="@style/buttonScore"
+                android:onClick="penaltyTeamB"
+                android:text="@string/btn_text_penalty"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Reset Button-->
+    <Button
+        style="@style/buttonReset"
+        android:onClick="resetScores"
+        android:text="@string/bnt_text_reset"
+        />
+
+</RelativeLayout>

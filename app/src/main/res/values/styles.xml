@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="titleTextColor">@color/titleText</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorButtonNormal">@color/primary</item>
+    </style>
+
+    <!--Button's used for scoring-->
+    <style name="buttonScore" parent="@style/TextAppearance.AppCompat.Widget.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:colorButtonNormal">@color/primary</item>
+        <item name="android:textColor">@color/lightTextOnDark</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--Score display-->
+    <style name="score_display">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/lightTextOnDark</item>
+        <item name="android:textSize">56sp</item>
+    </style>
+
+    <!--Team's name-->
+    <style name="team_name">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/lightTextOnDark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--Layout for each team-->
+    <style name="team_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!--Reset button-->
+    <style name="buttonReset" parent="buttonScore">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_margin">32dp</item>
+    </style>
+
+    <!--Vertical separator between the two teams-->
+    <style name="verticalSeparator">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+</resources>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="titleText">#F5F5F5</color>
+    <color name="primary">#388E3C</color>
+    <color name="primaryDark">#757575</color>
+    <color name="lightTextOnDark">#F5F5F5</color>
+    <color name="background">#EEEEEE</color>
+    <color name="lightOverlay">#55FFFFFF</color>
+</resources>
+
