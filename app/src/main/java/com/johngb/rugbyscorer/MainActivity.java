@@ -11,92 +11,77 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MainActivity extends AppCompatActivity {
 
-    int scoreTeamA = 0;
-    int scoreTeamB = 0;
-    String lastScore = "";
+    private int scoreTeamA = 0;
+    private TextView scoreViewTeamA;
+    private Button btnTeamAConversion;
+
+    private int scoreTeamB = 0;
+    private TextView scoreViewTeamB;
+    private Button btnTeamBConversion;
+
+    private String lastScore = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the scoreViews so that we don't have to do ao findViewBy often.
+        scoreViewTeamA = (TextView) findViewById(R.id.team_a_score);
+        btnTeamAConversion = (Button) findViewById(R.id.btn_team_a_conversion);
+
+        scoreViewTeamB = (TextView) findViewById(R.id.team_b_score);
+        btnTeamBConversion = (Button) findViewById(R.id.btn_team_b_conversion);
+
         updateConversionButtonStates();
     }
 
-    /**
-     * Team A's try button was pressed.
-     *
-     * @param v
-     */
-    public void tryTeamA(View v) {
-        scoreTeamA += 5;
-        lastScore = "team_a_try";
-        processScores();
-    }
+    public void onSubmitScore(View v) {
 
-    /**
-     * Team A's conversion button was pressed.
-     *
-     * @param v
-     */
-    public void conversionTeamA(View v) {
-        scoreTeamA += 2;
-        lastScore = "team_a_conversion";
-        processScores();
-    }
+        switch (v.getId()) {
 
-    /**
-     * Team A's penalty button was pressed.
-     *
-     * @param v
-     */
-    public void penaltyTeamA(View v) {
-        scoreTeamA += 3;
-        lastScore = "team_a_penalty";
-        processScores();
-    }
+            case R.id.btn_team_a_try:
+                scoreTeamA += 5;
+                lastScore = "team_a_try";
+                break;
 
-    /**
-     * Team B's try button was pressed.
-     *
-     * @param v
-     */
-    public void tryTeamB(View v) {
-        scoreTeamB += 5;
-        lastScore = "team_b_try";
-        processScores();
-    }
+            case R.id.btn_team_a_conversion:
+                scoreTeamA += 2;
+                lastScore = "team_a_conversion";
+                break;
 
-    /**
-     * Team B's conversion button was pressed.
-     *
-     * @param v
-     */
-    public void conversionTeamB(View v) {
-            scoreTeamB += 2;
-        lastScore = "team_b_conversion";
-        processScores();
+            case R.id.btn_team_a_penalty:
+                scoreTeamA += 3;
+                lastScore = "team_a_penalty";
+                break;
+
+            case R.id.btn_team_b_try:
+                scoreTeamB += 5;
+                lastScore = "team_b_try";
+                break;
+
+            case R.id.btn_team_b_conversion:
+                scoreTeamB += 2;
+                lastScore = "team_b_conversion";
+                break;
+
+            case R.id.btn_team_b_penalty:
+                scoreTeamB += 3;
+                lastScore = "team_b_penalty";
+                break;
+
+            case R.id.btn_reset_scores:
+                scoreTeamA = scoreTeamB = 0;
+                lastScore = "";
+                break;
         }
 
-    /**
-     * Team B's penalty button was pressed.
-     *
-     * @param v
-     */
-    public void penaltyTeamB(View v) {
-        scoreTeamB += 3;
-        lastScore = "team_b_penalty";
-        processScores();
-    }
+        // Update both team score displays.
+        scoreViewTeamA.setText(String.valueOf(scoreTeamA));
+        scoreViewTeamB.setText(String.valueOf(scoreTeamB));
 
-    /**
-     * Scores reset button was pressed.
-     *
-     * @param v
-     */
-    public void resetScores(View v) {
-        scoreTeamA = scoreTeamB = 0;
-        lastScore = "none";
-        processScores();
+        // Update the conversion button states.
+        updateConversionButtonStates();
     }
 
     /**
@@ -104,71 +89,39 @@ public class MainActivity extends AppCompatActivity {
      * try has been scored.
      */
     public void updateConversionButtonStates() {
-        // If the last score was team A scoring a try, then team A's conversion button should be
-        // active, and B's inactive.
-        if (lastScore == "team_a_try") {
-            Button btnA = (Button) findViewById(R.id.btn_team_a_conversion);
-            btnA.setEnabled(true);
-            btnA.setVisibility(View.VISIBLE);
 
-            Button btnB = (Button) findViewById(R.id.btn_team_b_conversion);
-            btnB.setEnabled(false);
-            btnB.setVisibility(View.INVISIBLE);
+        switch (lastScore) {
+
+            // If the last score was team A scoring a try, then team A's conversion button should be
+            // active, and B's inactive.
+            case "team_a_try":
+                btnTeamAConversion.setEnabled(true);
+                btnTeamAConversion.setVisibility(View.VISIBLE);
+
+                btnTeamBConversion.setEnabled(false);
+                btnTeamBConversion.setVisibility(View.INVISIBLE);
+
+                break;
+
+            // Else if the last score was team A scoring a try, then team A's conversion button should
+            // be active, and B's inactive.
+            case "team_b_try":
+                btnTeamBConversion.setEnabled(true);
+                btnTeamBConversion.setVisibility(View.VISIBLE);
+
+                btnTeamAConversion.setEnabled(false);
+                btnTeamAConversion.setVisibility(View.INVISIBLE);
+
+                break;
+
+            // Else, both should be inactive.
+            default:
+                btnTeamBConversion.setEnabled(false);
+                btnTeamBConversion.setVisibility(View.INVISIBLE);
+
+                btnTeamAConversion.setEnabled(false);
+                btnTeamAConversion.setVisibility(View.INVISIBLE);
         }
-        // Else if the last score was team A scoring a try, then team A's conversion button should
-        // be active, and B's inactive.
-        else if (lastScore == "team_b_try") {
-            Button btnB = (Button) findViewById(R.id.btn_team_b_conversion);
-            btnB.setEnabled(true);
-            btnB.setVisibility(View.VISIBLE);
-
-            Button btnA = (Button) findViewById(R.id.btn_team_a_conversion);
-            btnA.setEnabled(false);
-            btnA.setVisibility(View.INVISIBLE);
-        }
-
-        // Else, both should be inactive.
-        else {
-            Button btnB = (Button) findViewById(R.id.btn_team_b_conversion);
-            btnB.setEnabled(false);
-            btnB.setVisibility(View.INVISIBLE);
-
-            Button btnA = (Button) findViewById(R.id.btn_team_a_conversion);
-            btnA.setEnabled(false);
-            btnA.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
-     * Process the score displays for both teams. Calling this function simply makes sure that the
-     * displayed values match the stored values.
-     */
-    public void processScores(){
-        // Update both team score displays.
-        TextView scoreViewA = (TextView) findViewById(R.id.team_a_score);
-        scoreViewA.setText(String.valueOf(scoreTeamA));
-        TextView scoreViewB = (TextView) findViewById(R.id.team_b_score);
-        scoreViewB.setText(String.valueOf(scoreTeamB));
-
-        // Update the conversion button states.
-        updateConversionButtonStates();
-    }
-
-    /**
-     * Displays the given score for Team A.
-     */
-    public void updateTeamAScoreDisplay() {
-
-        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
-        scoreView.setText(String.valueOf(scoreTeamA));
-    }
-
-    /**
-     * Displays the given score for Team B.
-     */
-    public void updateTeamBScoreDisplay() {
-        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
-        scoreView.setText(String.valueOf(scoreTeamB));
     }
 }
 
